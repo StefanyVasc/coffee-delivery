@@ -9,9 +9,9 @@ import {
   CoffeeTags,
   CoffeeTitle,
   Order,
-  OrderWrapper,
   PriceTag,
-} from './style'
+} from './styles'
+import { QuantityInput } from '../FormInputs/QuantityInput'
 
 type Props = {
   coffee: {
@@ -65,16 +65,12 @@ export function Card({ coffee }: Props) {
           <span>{coffee.price.toFixed(2)}</span>
         </PriceTag>
 
-        <Order>
-          <OrderWrapper>
-            <button onClick={decrementQuantity}>
-              <Minus size={14} />
-            </button>
-            <span>{quantity}</span>
-            <button onClick={incrementQuantity}>
-              <Plus size={14} />
-            </button>
-          </OrderWrapper>
+        <Order $itemAdded={isItemAdded}>
+          <QuantityInput
+            quantity={quantity}
+            incrementQuantity={incrementQuantity}
+            decrementQuantity={decrementQuantity}
+          />
 
           <button disabled={isItemAdded} onClick={handleAddItemToCart}>
             {isItemAdded ? (

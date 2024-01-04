@@ -7,6 +7,8 @@ import {
   HeroContent,
   InfoContainer,
 } from './style'
+import { Card } from '../../components/Card'
+import { coffees } from '../../../data.json'
 
 export function Home() {
   const theme = useTheme()
@@ -76,7 +78,11 @@ export function Home() {
 
       <CoffeeListContainer>
         <h2>Nossos cafés</h2>
-        <div>cafes</div>
+        <div>
+          {coffees.map((coffee) => (
+            <Card key={coffee.id} coffee={coffee} />
+          ))}
+        </div>
       </CoffeeListContainer>
     </div>
   )

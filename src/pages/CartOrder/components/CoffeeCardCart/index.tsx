@@ -1,5 +1,8 @@
 import { QuantityInput } from '../../../../components/QuantityInput'
 import { RegularText } from '../../../../components/Typography'
+import { CartItem } from '../../../../contexts/CartContext'
+import { useCart } from '../../../../hooks/useCart'
+import { formatMoney } from '../../../../utils/formatMoney'
 import {
   ActionsContainer,
   CoffeeCartCardContainer,
@@ -7,21 +10,45 @@ import {
 } from './styles'
 import { Trash } from '@phosphor-icons/react'
 
-export function CoffeeCartCard() {
+interface CoffeeCartCardProps {
+  coffee: CartItem
+}
+
+export function CoffeeCartCard({ coffee }: CoffeeCartCardProps) {
+  const { changeCartItemQuantity, removeCoffeeToCartById } = useCart()
+
+  function handleIncrease() {
+    changeCartItemQuantity(coffee.id, 'increase')
+  }
+
+  function handleDecrease() {
+    changeCartItemQuantity(coffee.id, 'decrease')
+  }
+
+  function handleRemoveCoffee() {
+    removeCoffeeToCartById(coffee.id)
+  }
+
+  const coffeeTotal = coffee.price * coffee.quantity
+  const formattedPrice = formatMoney(coffeeTotal)
+
   return (
     <CoffeeCartCardContainer>
       <div>
-        {/* <img src={`/coffees/${coffee.photo}`} alt="" /> */}
+        <img
+          src={`/assets/coffees/${coffee.photo}`}
+          alt={`imagem que simboliza uma xícara de café do tipo ${coffee.name}`}
+        />
         <div>
-          <RegularText color="subtitle">café 1</RegularText>
+          <RegularText color="subtitle">{coffee.name}</RegularText>
           <ActionsContainer>
             <QuantityInput
-              onIncrease={() => {}}
-              onDecrease={() => {}}
-              quantity={1}
+              onIncrease={handleIncrease}
+              onDecrease={handleDecrease}
+              quantity={coffee.quantity}
               size="small"
             />
-            <RemoveButton type="button" onClick={() => {}}>
+            <RemoveButton type="button" onClick={handleRemoveCoffee}>
               <Trash size={16} />
               remover
             </RemoveButton>
@@ -29,7 +56,7 @@ export function CoffeeCartCard() {
         </div>
       </div>
 
-      <p>R$ 9,99</p>
+      <p>R$ {formattedPrice}</p>
     </CoffeeCartCardContainer>
   )
 }

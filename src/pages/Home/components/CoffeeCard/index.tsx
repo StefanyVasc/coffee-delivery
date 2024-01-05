@@ -9,32 +9,60 @@ import {
   Tags,
 } from './styles'
 import { QuantityInput } from '../../../../components/QuantityInput'
+import { useState } from 'react'
+import { formatMoney } from '../../../../utils/formatMoney'
 
-export function CoffeeCard() {
+export interface Coffee {
+  id: number
+  tags: string[]
+  name: string
+  description: string
+  photo: string
+  price: number
+}
+
+interface CoffeeProps {
+  coffee: Coffee
+}
+
+export function CoffeeCard({ coffee }: CoffeeProps) {
+  const [quantity, setQuantity] = useState(1)
+  const formattedPrice = formatMoney(coffee.price)
+
+  function handleIncrease() {
+    setQuantity((state) => state + 1)
+  }
+
+  function handleDecrease() {
+    setQuantity((state) => state - 1)
+  }
+
   return (
     <CoffeeCardContainer>
-      {/* <img src={`/coffees/${coffee.photo}`} /> */}
+      <img
+        src={`/assets/coffees/${coffee.photo}`}
+        alt={`imagem que simboliza uma xícara de café do tipo ${coffee.name}`}
+      />
       <Tags>
-        <span>Tradicional</span>
-        <span>Com leite</span>
+        {coffee.tags.map((tag) => (
+          <span key={`${coffee.id}${tag}`}>{tag}</span>
+        ))}
       </Tags>
-      <Name>Expresso Tradicional</Name>
-      <Description>
-        O tradicional café feito com água quente e grãos moídos
-      </Description>
+      <Name>{coffee.name}</Name>
+      <Description>{coffee.description}</Description>
       <CardFooter>
         <div>
           <RegularText size="s">R$</RegularText>
           <TitleText size="m" color="text" as="strong">
-            9.99
+            {formattedPrice}
           </TitleText>
         </div>
 
         <AddCartWrapper>
           <QuantityInput
-            onIncrease={() => {}}
-            onDecrease={() => {}}
-            quantity={1}
+            onIncrease={handleIncrease}
+            onDecrease={handleDecrease}
+            quantity={quantity}
           />
           <button onClick={() => {}}>
             <ShoppingCart weight="fill" size={22} />

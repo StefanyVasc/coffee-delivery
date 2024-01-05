@@ -1,4 +1,5 @@
 import { TitleText } from '../../../../components/Typography'
+import { coffees } from '../../../../data/coffees'
 import { CoffeeCard } from '../CoffeeCard'
 import { CoffeeList, CoffeeShowcaseContainer } from './styles'
 
@@ -10,10 +11,9 @@ export function CoffeeShowcase() {
       </TitleText>
 
       <CoffeeList>
-        <CoffeeCard />
-        <CoffeeCard />
-        <CoffeeCard />
-        <CoffeeCard />
+        {coffees.map((coffee) => (
+          <CoffeeCard key={coffee.id} coffee={coffee} />
+        ))}
       </CoffeeList>
     </CoffeeShowcaseContainer>
   )

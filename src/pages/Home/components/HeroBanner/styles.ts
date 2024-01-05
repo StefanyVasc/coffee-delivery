@@ -6,19 +6,19 @@ import { rgba } from 'polished'
 export const HeroContainer = styled.section`
   width: 100%;
   height: 34rem;
-
-  background: ${({ theme }) => `url(${HeroBg}) no-repeat center,
-      linear-gradient(
-        0deg,
-        ${theme.colors['base-white']} 0%,
-        ${rgba(theme.colors['base-background'], 0.2)} 50%,
-        ${theme.colors['base-background']} 100%
-      )`};
-  background-size: cover;
-
   display: flex;
   align-items: center;
   justify-content: center;
+
+  background-size: cover;
+
+  background: ${({ theme }) => `url(${HeroBg}) no-repeat center,
+    linear-gradient(
+      0deg,
+      ${theme.colors['base-white']} 0%,
+      ${rgba(theme.colors['base-background'], 0.2)} 50%,
+      ${theme.colors['base-background']} 100%
+  )`};
 `
 export const HeroContent = styled.div`
   width: 100%;

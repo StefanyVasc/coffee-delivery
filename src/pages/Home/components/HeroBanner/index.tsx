@@ -2,13 +2,13 @@ import { ShoppingCart, Package, Timer, Coffee } from '@phosphor-icons/react'
 import { useTheme } from 'styled-components'
 import { RegularText } from '../../../../components/Typography'
 import { InfoWithIcon } from '../../../../components/InfoWithIcon'
+import HeroImg from '../../../../assets/HeroImage.svg'
 import {
   BenefitsContainer,
   HeroContainer,
   HeroContent,
   HeroTitle,
 } from './styles'
-import HeroImg from '../../../../assets/HeroImage.svg'
 
 export function HeroBanner() {
   const { colors } = useTheme()

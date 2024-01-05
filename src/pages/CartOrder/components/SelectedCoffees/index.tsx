@@ -2,6 +2,7 @@ import { TitleText } from '../../../../components/Typography'
 import { useCart } from '../../../../hooks/useCart'
 import { CoffeeCartCard } from '../CoffeeCardCart'
 import { ConfirmationSection } from './ConfirmationSection'
+import { EmptyCardCart } from './EmptyCardCart'
 import { DetailsContainer, SelectedCoffeesContainer } from './styles'
 
 export function SelectedCoffees() {
@@ -12,12 +13,17 @@ export function SelectedCoffees() {
       <TitleText size="xs" color="subtitle">
         Cafés selecionados
       </TitleText>
-
       <DetailsContainer>
-        {cartItems.map((item) => (
-          <CoffeeCartCard key={item.id} coffee={item} />
-        ))}
-        <ConfirmationSection />
+        {cartItems.length === 0 ? (
+          <EmptyCardCart />
+        ) : (
+          cartItems.map((item) => (
+            <>
+              <CoffeeCartCard key={item.id} coffee={item} />
+              <ConfirmationSection />
+            </>
+          ))
+        )}
       </DetailsContainer>
     </SelectedCoffeesContainer>
   )

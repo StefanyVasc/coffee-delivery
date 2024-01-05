@@ -1,62 +1,79 @@
-import styled from 'styled-components'
-import { mixins } from '../../styles/mixins'
+import styled, { css } from 'styled-components'
 
 export const HeaderContainer = styled.header`
-  max-width: 1120px;
-  padding: 32px 20px;
-  margin: 0 auto;
-
+  width: 100%;
+  height: 6.5rem;
+  background: ${({ theme }) => theme.colors['base-background']};
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 5;
+
+  > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `
-export const Aside = styled.aside`
+
+export const HeaderButtonsContainer = styled.div`
   display: flex;
-  gap: 12px;
+  align-items: center;
+  gap: 0.75rem;
+`
 
-  .address {
+interface HeaderButtonProps {
+  variant: 'purple' | 'yellow'
+}
+
+export const HeaderButton = styled.button<HeaderButtonProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 6px;
+  border: none;
+  padding: 0 0.5rem;
+  position: relative;
+  cursor: inherit;
+  font-size: ${({ theme }) => theme.textSizes['text-regular-s']};
+
+  span {
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    top: calc(-1.25rem / 2);
+    right: calc(-1.25rem / 2);
+    color: ${({ theme }) => theme.colors['base-white']};
     display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 10px 8px;
-    border-radius: 6px;
-    background-color: ${({ theme }) => theme.colors.purpleLight};
-
-    svg {
-      color: ${({ theme }) => theme.colors.purple};
-    }
-
-    span {
-      color: ${({ theme }) => theme.colors.purpleDark};
-    }
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
   }
 
-  .cart {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    border-radius: 6px;
-    position: relative;
-
-    background-color: ${({ theme }) => theme.colors.yellowLight};
-    color: ${({ theme }) => theme.colors.yellowDark};
+  /* validando a variant e criando o css dinamico */
+  ${({ variant }) => css`
+    background: ${({ theme }) => theme.colors[`brand-${variant}-light`]};
+    color: ${({ theme }) => theme.colors[`brand-${variant}-dark`]};
 
     span {
-      ${mixins.fonts.textS};
-      font-weight: bold;
-      color: ${({ theme }) => theme.colors.white};
-      background-color: ${({ theme }) => theme.colors.yellowDark};
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      position: absolute;
-      top: 3px;
-      right: 3px;
-      transform: translate(50%, -50%);
+      background: ${({ theme }) => theme.colors[`brand-${variant}-dark`]};
     }
-  }
+  `}
+
+  ${({ variant }) =>
+    variant === 'purple' &&
+    css`
+      svg {
+        color: ${({ theme }) => theme.colors[`brand-${variant}`]};
+      }
+    `}
 `

@@ -6,6 +6,10 @@ export const PaymentMethodContainer = styled.div`
     appearance: none;
   }
 
+  label:hover {
+    cursor: pointer;
+  }
+
   input:checked + label div {
     ${({ theme }) => css`
       background: ${theme.colors['brand-purple-light']};

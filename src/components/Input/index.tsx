@@ -8,7 +8,7 @@ import {
 } from './styles'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-  error?: string
+  error?: string | undefined
   rightText?: string
 }
 
@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ error, rightText, className, ...props }, ref) => {
     return (
       <InputWrapper className={className}>
-        <InputStyleContainer hasError={!!error}>
+        <InputStyleContainer haserror={error ? true : undefined}>
           <InputStyled ref={ref} {...props} />
           {rightText && <RightText>{rightText}</RightText>}
         </InputStyleContainer>

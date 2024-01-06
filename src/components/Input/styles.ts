@@ -12,7 +12,7 @@ export const InputWrapper = styled.div`
 `
 
 interface InputContainerProps {
-  hasError: boolean
+  haserror: boolean | undefined
 }
 
 export const InputStyleContainer = styled.div<InputContainerProps>`
@@ -32,8 +32,8 @@ export const InputStyleContainer = styled.div<InputContainerProps>`
     border-color: ${({ theme }) => theme.colors['brand-yellow-dark']};
   }
 
-  ${({ theme, hasError }) =>
-    hasError &&
+  ${({ theme, haserror }) =>
+    haserror &&
     css`
       border-color: ${theme.colors['base-error']};
     `}

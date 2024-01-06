@@ -16,9 +16,7 @@ export function EmptyCardCart() {
         </RegularText>
       </div>
       <Navigation>
-        <RegularText size="s">
-          Não deixe de aproveitar de provar os nossos cafés.
-        </RegularText>
+        <RegularText size="s">Não deixe de provar os nossos cafés.</RegularText>
         <NavLink to="/">
           <RegularText weight={800}>Acesse catálogo</RegularText>
         </NavLink>

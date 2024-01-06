@@ -5,6 +5,7 @@ export const InputWrapper = styled.div`
   flex-direction: column;
   gap: 0.3rem;
   position: relative;
+  width: inherit;
 
   > p {
     color: ${({ theme }) => theme.colors['base-error']};
@@ -16,6 +17,7 @@ interface InputContainerProps {
 }
 
 export const InputStyleContainer = styled.div<InputContainerProps>`
+  width: inherit;
   height: 2.625rem;
   border-radius: 4px;
   border: 1px solid ${({ theme }) => theme.colors['base-button']};
@@ -40,6 +42,7 @@ export const InputStyleContainer = styled.div<InputContainerProps>`
 `
 
 export const InputStyled = styled.input`
+  width: inherit;
   flex: 1;
   background: none;
   border: none;

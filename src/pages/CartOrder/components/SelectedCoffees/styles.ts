@@ -12,6 +12,13 @@ export const DetailsContainer = styled(SectionBaseStyle)`
   border-radius: 6px 44px;
   display: flex;
   flex-direction: column;
+
+  & .wrapper {
+    max-height: 335px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    min-width: 380px;
+  }
 `
 
 export const ConfirmationSectionContainer = styled.section`

@@ -1,12 +1,32 @@
+import { useTheme } from 'styled-components'
+import { useEffect } from 'react'
 import { Clock, CurrencyDollar, MapPin } from '@phosphor-icons/react'
 import { InfoWithIcon } from '../../components/InfoWithIcon'
 import { RegularText, TitleText } from '../../components/Typography'
 import { OrderDetailsContainer, SuccessOrderContainer } from './styles'
 import Delivery from '../../assets/Delivery.svg'
-import { useTheme } from 'styled-components'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { OrderData } from '../CartOrder'
+import { paymentMethods } from '../CartOrder/components/CompleteOrderForm/PaymentMethod'
+
+interface LocationType {
+  state: OrderData
+}
 
 export function SuccessOrderPage() {
   const { colors } = useTheme()
+
+  const { state } = useLocation() as unknown as LocationType
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!state) {
+      navigate('/')
+    }
+  }, [state, navigate])
+
+  if (!state) return <></>
 
   return (
     <SuccessOrderContainer className="container">
@@ -24,11 +44,9 @@ export function SuccessOrderPage() {
             iconbg={colors['brand-purple']}
             text={
               <RegularText>
-                Entrega em
-                {/* Entrega em <strong>{state.street}</strong>, {state.number} */}
+                Entrega em <strong>{state.street}</strong>, {state.number}
                 <br />
-                {/* {state.district} - {state.city}, {state.uf} */}
-                Cordeiro - Recife, PE
+                {state.district} - {state.city}, {state.uf}
               </RegularText>
             }
           />
@@ -52,8 +70,7 @@ export function SuccessOrderPage() {
               <RegularText>
                 Pagamento na entrega
                 <br />
-                {/* <strong>{paymentMethods[state.paymentMethod].label}</strong> */}
-                <strong>Cartão de crédito</strong>
+                <strong>{paymentMethods[state.paymentMethod].label}</strong>
               </RegularText>
             }
           />
